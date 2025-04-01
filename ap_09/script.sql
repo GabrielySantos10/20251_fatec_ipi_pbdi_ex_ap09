@@ -1,24 +1,63 @@
---  1.4 Um comerciante comprou um produto e quer vendê-lo com um lucro de 45% se o valor da compra for menor que R$20. Caso contrário, ele deseja lucro de 30%. Faça um programa que, dado o valor do produto, calcula o valor de venda.
+-- 1.5
+-- IF
+
 -- CASE
 DO $$
 DECLARE
-    valor_compra INT := valor_aleatorio_entre(1,100);
-    valor_venda FLOAT ;
-    acrescimo_venda FLOAT ;
+    salario INT := valor_aleatorio_entre(1, 5000);
+    novo_salario FLOAT;
+    percentual FLOAT;
+    reajuste FLOAT;
 BEGIN
-    CASE
-        WHEN valor_compra <20 THEN
-        acrescimo_venda := valor_compra * 0.45;
-        valor_venda := acrescimo_venda + valor_compra;
-        ELSE
-        acrescimo_venda := valor_compra * 0.30;
-        valor_venda := acrescimo_venda + valor_compra;
-    RAISE NOTICE 
-    'o valor de compra foi: %, e com o acréscimo de: %, o valor de venda será de: %',
-     valor_compra, acrescimo_venda, valor_venda;
+    CASE WHEN salario <= 400 THEN
+    percentual := 0.15;
+    reajuste := percentual * salario;
+    novo_salario := salario + reajuste;
+    WHEN salario BETWEEN 400.1 AND 800 THEN
+    percentual := 0.12;
+    reajuste := percentual * salario;
+    novo_salario := salario + reajuste;
+    WHEN salario BETWEEN 800.01 AND 1200 THEN
+    percentual := 0.10;
+    reajuste := percentual * salario;
+    novo_salario := salario + reajuste;
+    WHEN salario BETWEEN 1200.01 AND 2000 THEN
+    percentual := 0.07;
+    reajuste := percentual * salario;
+    novo_salario := salario + reajuste;
+    WHEN salario > 2000 THEN
+    percentual := 0.04;
+    reajuste := percentual * salario;
+    novo_salario := salario + reajuste;
     END CASE;
+RAISE NOTICE'novo salário: % ', novo_salario;
+RAISE NOTICE'reajuste ganho: %', reajuste;
+RAISE NOTICE'em percentual: %', percentual;
 END;
 $$
+
+--  1.4 Um comerciante comprou um produto e quer vendê-lo com um lucro de 45% se o valor da compra for menor que R$20. Caso contrário, ele deseja lucro de 30%. Faça um programa que, dado o valor do produto, calcula o valor de venda.
+-- CASE
+
+-- DO $$
+-- DECLARE
+--     valor_compra INT := valor_aleatorio_entre(1,100);
+--     valor_venda FLOAT ;
+--     acrescimo_venda FLOAT ;
+-- BEGIN
+--     CASE
+--         WHEN valor_compra <20 THEN
+--         acrescimo_venda := valor_compra * 0.45;
+--         valor_venda := acrescimo_venda + valor_compra;
+--         ELSE
+--         acrescimo_venda := valor_compra * 0.30;
+--         valor_venda := acrescimo_venda + valor_compra;
+--     RAISE NOTICE 
+--     'o valor de compra foi: %, e com o acréscimo de: %, o valor de venda será de: %',
+--      valor_compra, acrescimo_venda, valor_venda;
+--     END CASE;
+-- END;
+-- $$
 
 
 -- -- IF 
